@@ -57,5 +57,6 @@ def notify(data, buffer, date, tags, displayed, highlight, prefix, message):
 #		if weechat.config_get_plugin('show_message_text') == 'on':
 #			Notifier.notify(message, title='%s [private]' % prefix, sound=sound, appIcon=WEECHAT_ICON)
 #		else:
-		Notifier.notify('From %s'+' '+time % prefix, title='Private Message', sound=sound, appIcon=WEECHAT_ICON)
+                concatenatePMMessage = 'From %s at '+str(currentTime) 
+		Notifier.notify(concatenatePMMessage % prefix, title='Private Message', sound=sound, appIcon=WEECHAT_ICON)
 	return weechat.WEECHAT_RC_OK
