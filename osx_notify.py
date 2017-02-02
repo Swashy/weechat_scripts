@@ -4,7 +4,7 @@
 import os
 import weechat
 from pync import Notifier
-from time import sleep
+from time import sleep, strftime, localtime
 
 SCRIPT_NAME = 'osx_notify'
 SCRIPT_AUTHOR = 'Sindre Sorhus <sindresorhus@gmail.com>'
@@ -38,6 +38,7 @@ def notify(data, buffer, date, tags, displayed, highlight, prefix, message):
 	# passing `None` or `''` still plays the default sound so we pass a lambda instead
 	sound = weechat.config_get_plugin('sound_name') if weechat.config_get_plugin('sound') == 'on' else lambda:_
 	channel = weechat.buffer_get_string(buffer, 'localvar_channel')
+        currentTime = strftime("%H:%M:%S", localtime())
 	#If show highlights are on, and this is one of our weechat configured hightlights...
 	if weechat.config_get_plugin('show_highlights') == 'on' and int(highlight):
 		if weechat.config_get_plugin('show_message_text') == 'on':
@@ -56,5 +57,5 @@ def notify(data, buffer, date, tags, displayed, highlight, prefix, message):
 #		if weechat.config_get_plugin('show_message_text') == 'on':
 #			Notifier.notify(message, title='%s [private]' % prefix, sound=sound, appIcon=WEECHAT_ICON)
 #		else:
-		Notifier.notify('From %s' % prefix, title='Private Message', sound=sound, appIcon=WEECHAT_ICON)
+		Notifier.notify('From %s'+' '+time % prefix, title='Private Message', sound=sound, appIcon=WEECHAT_ICON)
 	return weechat.WEECHAT_RC_OK
