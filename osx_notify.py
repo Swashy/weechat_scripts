@@ -57,6 +57,9 @@ def notify(data, buffer, date, tags, displayed, highlight, prefix, message):
 #		if weechat.config_get_plugin('show_message_text') == 'on':
 #			Notifier.notify(message, title='%s [private]' % prefix, sound=sound, appIcon=WEECHAT_ICON)
 #		else:
-                concatenatePMMessage = 'From %s at '+str(currentTime) 
+# Showing the time annoyingly causes new notifications for every PM. If a notification is identical to the last one in content,
+# it won't open an additional one. Gonna have to take time out for now.
+#                concatenatePMMessage = 'From %s at '+str(currentTime)
+                concatenatePMMessage = 'From %s'
 		Notifier.notify(concatenatePMMessage % prefix, title='Private Message', sound=sound, appIcon=WEECHAT_ICON)
 	return weechat.WEECHAT_RC_OK
